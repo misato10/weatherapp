@@ -10,7 +10,6 @@
 <!--ページ個別css-->
 <link rel="stylesheet" href="css/app.css" media="all">
 <!--js-->
-
 </head>
 <body>
 	
@@ -21,7 +20,7 @@
 			<h2 class="city">{{city}}</h2>
 			<img class="ico"  v-bind:src='todayImage' alt="">
 			<p class="weather">{{ todayDes }}</p>
-			<button class="pin" v-on:click="getlocal">現在位置からお天気情報を取得</button>
+			<button class="pin" v-on:click="getlocal">現在位置</button>
 			<div class="btm clr">
 				<div class="today">
 					<span>今日</span>
