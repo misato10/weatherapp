@@ -1,0 +1,307 @@
+@charset "utf-8";
+
+
+
+html, body {
+    width: 100%;
+    height: 100%;
+    color: #707070;
+    background: #fff;
+	font-size: 10px;
+}
+
+#weatherApp {
+	text-align: center;
+	font-size: 1.4rem;
+	letter-spacing: 0.05em;
+	line-height: 1.4;
+	padding-bottom: 70px;
+}
+
+#weatherApp * {
+	box-sizing: border-box;
+}
+
+
+/* -----------------------------------------------------------------------------
+
+	mainArea
+  
+----------------------------------------------------------------------------- */
+.mainArea {
+	position: relative;
+	padding: 68px 15px 4px;
+	border-bottom: 1px solid #EEE;
+}
+.mainArea .city {
+	font-size: 4rem;
+	font-weight: normal;
+}
+.mainArea .ico {
+	margin: 10px 0;
+}
+.mainArea .weather {
+	font-size: 16px;
+}
+.mainArea .pin {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+}
+.mainArea .btm {
+	position: relative;
+	margin: 40px auto 0;
+	max-width: 640px;
+}
+.mainArea .btm .today {
+	float: left;
+	text-align: left;
+	
+}
+.mainArea .btm .today p {
+	font-size: 2.4rem;
+	margin-top: 3px;
+}
+.mainArea .btm .temperature {
+	position: absolute;
+	right:0;
+	bottom: 0;
+	font-size: 0;
+}
+.mainArea .btm .temperature .mainTemperature , .mainArea .btm .temperature ul , .mainArea .btm .temperature p , .mainArea .btm .temperature ul li {
+	display: inline-block;
+	vertical-align: bottom;
+}
+.mainArea .btm .temperature .mainTemperature {
+	font-size: 3.2rem;
+}
+.mainArea .btm .temperature ul {
+    margin-left: 10px;
+    margin-bottom: 6px;
+}
+.mainArea .btm .temperature ul li {
+	font-size: 1.6rem;
+}
+.mainArea .btm .temperature ul li.max {
+	color: #E2476C;
+}
+.mainArea .btm .temperature ul li.max::after {
+	content: '/';
+	color: #707070;
+	margin: 0 3px;
+}
+.mainArea .btm .temperature ul li.min {
+	color: #3D84E1;
+}
+
+/* フェード
+  ---------------------------------------------*/
+  
+  .container.fade-enter-active {
+	transition: opacity .2s 1s;
+  } 
+  .container.fade-leave-active {
+	transition: opacity .2s;
+  }
+  .container.fade-enter,
+  .container.fade-leave-to {
+	opacity: 0;
+  }
+
+
+/* -----------------------------------------------------------------------------
+
+	subArea
+  
+----------------------------------------------------------------------------- */
+
+.subArea .weatherList {
+	overflow-x: scroll;
+	width: 100%;
+	border-bottom: 1px solid #EEE;
+}
+.subArea .weatherList ul {
+    padding: 20px 15px;
+    word-break: unset;
+    white-space: nowrap;
+	font-size: 0;
+}
+.subArea .weatherList li {
+	display: inline-block;
+	text-align: center;
+}
+.subArea .weatherList li + li {
+	margin-left: 20px;
+}
+.subArea .weatherList li img {
+	width: 35px;
+	margin: 10px 0;
+}
+.subArea .weatherList li > span {
+	display: block;
+	font-size: 1.4rem;
+}
+
+.subArea .details {
+	text-align: left;
+	padding: 20px 15px;
+}
+.subArea .details p + p {
+	margin-top: 5px;
+}
+
+
+/* -----------------------------------------------------------------------------
+
+	searchArea
+  
+----------------------------------------------------------------------------- */
+
+.searchArea {
+	position: fixed;
+	background: #3D3D3D;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+}
+.searchArea .inner {
+	padding: 20px 15px 20px;
+}
+.searchArea .txt {
+	font-size: 1.2rem;
+	text-align: center;
+	color: #fff;
+}
+.searchArea.fade-enter-active {
+	transition: opacity .2s;
+  }
+  
+  .searchArea.fade-leave-active {
+	transition: opacity .2s;
+  }
+  
+  .searchArea.fade-enter,
+  .searchArea.fade-leave-to {
+	opacity: 0;
+  }
+
+
+/* -----------------------------------------------------------------------------
+
+	footer
+  
+----------------------------------------------------------------------------- */
+
+footer {
+	height: 50px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: #3D3D3D;
+}
+
+footer .tempChange {
+	position: absolute;
+	font-size: 0;
+	left: 15px;
+	bottom: 13px;
+}
+footer .tempChange li {
+	display: inline-block;
+	font-size: 2rem;
+	line-height: 1;
+	color: #AFAFAF;
+	cursor: pointer;
+}
+footer .tempChange li.active {
+	color: #fff;
+	cursor: default;
+}
+footer .tempChange li:first-child::after {
+	content: '/';
+	color: #AFAFAF;
+	margin: 0 5px 0 8px;
+}
+footer .icoSerch {
+	position: absolute;
+	right: 15px;
+	bottom: 10px;
+	color: #fff;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+/* -----------------------------------------------------------------------------
+
+ローディング
+  
+----------------------------------------------------------------------------- */
+.loading {
+	position: absolute;
+	top: 80px;
+	left: 0;
+	right: 0;
+	text-align: center;
+  }
+  
+  .loading.fade-enter-active {
+	transition: opacity .2s;
+  }
+  
+  .loading.fade-leave-active {
+	transition: opacity .2s 1s;
+  }
+  
+  .loading.fade-enter,
+  .loading.fade-leave-to {
+	opacity: 0;
+  }
+
+/* -----------------------------------------------------------------------------
+
+エラー
+  
+----------------------------------------------------------------------------- */
+
+.errorArea.fade-enter-active {
+	transition: opacity .2s 1s;
+  }
+  
+ .errorArea.fade-leave-active {
+	transition: opacity .2s;
+  }
+  .errorArea.fade-enter,
+  .errorArea.fade-leave-to {
+	opacity: 0;
+  }
+
+
+	
+/* form
+  ---------------------------------------------*/
+label {
+    margin-bottom: 10px;
+    display: block;
+}
+input[type="text"],
+input[type="tel"], 
+input[type="email"],
+input[type="number"],
+select {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	border: 1px solid #e8e8e8;
+	height: 40px;
+	font-size: 16px;
+	padding:  5px 15px 3px;
+	font-family: "メイリオ", Meiryo,"ヒラギノ角ゴ Pro W3","HIragino Kaku Gothic Pro W3","HIragino Kaku Gothic Pro",Osaka,"ＭＳ Ｐゴシック", "MS P Gothic",sans-serif;
+	border-radius: 4px;
+	font-weight: 500;
+	width: 100%;
+}
+

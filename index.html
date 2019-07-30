@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html lang="ja-JP">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<title>お天気アプリ</title>
+<!--css-->
+<link rel="stylesheet" href="css/default.css" media="all">
+<!--ページ個別css-->
+<link rel="stylesheet" href="css/app.css" media="all">
+<!--js-->
+
+</head>
+<body>
+	
+<div id="weatherApp">
+	<transition name="fade">
+		<div v-if="city" class="container">
+		<div class="mainArea">
+			<h2 class="city">{{city}}</h2>
+			<img class="ico"  v-bind:src='todayImage' alt="">
+			<p class="weather">{{ todayDes }}</p>
+			<button class="pin" v-on:click="getlocal">現在位置からお天気情報を取得</button>
+			<div class="btm clr">
+				<div class="today">
+					<span>今日</span>
+					<p>{{ todayWeekStr }}曜日</p>
+				</div>
+				<div class="temperature">
+					<p class="mainTemperature"><span v-if="celsius">{{ todayTemp | integerFilter }}</span><span v-else>{{ todayTemp | tempchangeFilter | integerFilter }}</span>°</p>
+					<ul>
+						<li class="max"><span v-if="celsius">{{ maxTemp | integerFilter }}</span><span v-else>{{ maxTemp | tempchangeFilter | integerFilter }}</span>°</li>
+						<li class="min"><span v-if="celsius">{{ minTemp | integerFilter }}</span><span v-else>{{ minTemp | tempchangeFilter | integerFilter }}</span>°</li>
+					</ul>
+				</div>
+			</div><!-- .btm -->
+			
+		</div><!-- #mainArea -->
+		<div class="subArea">
+			<div class="weatherList">
+				<ul>
+					<!--<li>
+						<span class="time">現在</span>
+						<img v-bind:src='todayImage' alt="">
+						<span class="temp">{{todayTemp}}°</span>
+					</li>
+					<li v-for="item in every3Hour.slice(3,10)">
+					<span class="time">{{ item.dt_txt}}時</span>
+						<img v-bind:src='imgUrl + item.weather[0].icon + "@2x.png"' alt="">
+						<span class="temp">{{ item.main.temp }}</span>
+						<span class="temp">{{ item.dt }}</span>
+					</li>-->
+					<every-item
+				v-for="item in every3Hour.slice(3,10)"
+				v-bind:every="item"
+				v-bind:key="item.dt"
+				v-bind:url="imageUrl"
+				v-bind:file="imageFile"
+				v-bind:cels="celsius"
+				></every-item>
+				</ul>
+			</div><!-- .weatherList -->
+			
+			<div class="details">
+				<p>今日：現在の天気は{{todayDes}}。</p>
+				<p>現在の気温は<span v-if="celsius">{{ todayTemp | integerFilter }}</span><span v-else>{{ todayTemp | tempchangeFilter | integerFilter }}</span>°、今日の最高気温は<span v-if="celsius">{{ maxTemp | integerFilter }}</span><span v-else>{{ maxTemp | tempchangeFilter | integerFilter }}</span>°です。</p>
+			</div>
+			
+		</div><!-- #subArea -->
+		<pre style="text-align: left">今日の天気JSON：{{ todayWhether}}</pre>
+         <pre style="text-align: left">数日間の天気JSON：{{ everyWhether}}</pre>
+		</div>
+	</transition>	
+
+
+<transition name="fade">
+		<div v-if="loading" class="loading">
+		  <div class="loader">
+			<svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+	  <path fill="#ccc" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+		<animateTransform attributeType="xml"
+		  attributeName="transform"
+		  type="rotate"
+		  from="0 25 25"
+		  to="360 25 25"
+		  dur="0.8s"
+		  repeatCount="indefinite"/>
+		</path>
+	  </svg>
+		  </div>
+		</div>
+</transition>
+<transition name="fade">
+	<div v-if="search" class="searchArea">
+		<div class="inner">
+			<p class="txt">都市名を英語で入力</p>
+			<input type="text" v-model="keyword" v-on:keyup.enter="searchWeather">
+		</div>
+	</div>
+</transition>	
+	
+	<footer>
+		<ul class="tempChange">
+			<li v-bind:class='{active:celsius}' v-on:click='celsius=!celsius'>°C</li>
+			<li v-bind:class='{active:!celsius}' v-on:click='celsius=!celsius'>°F</li>
+		</ul>
+		<p v-on:click='search=!search' class="icoSerch">検</p>
+  　</footer>
+
+<transition name="fade">
+	<div v-if="hasError" class="errorArea">
+	  <p>{{ errTxt }}</p>
+	</div>
+</transition>
+  
+  
+
+</div><!-- #WeatherApp -->
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
