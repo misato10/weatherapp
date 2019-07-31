@@ -1,6 +1,6 @@
 Vue.filter('integerFilter', function (value) {
   // 処理された値を返す
-  return value = Math.round(value)
+  return value = Math.floor(value)
 })
 
 Vue.filter('tempchangeFilter', function (value) {
@@ -8,9 +8,25 @@ Vue.filter('tempchangeFilter', function (value) {
   return value = (value * 9 / 5) +32
 })
 
+Vue.filter('tempFilter', function (value) {
+  // 処理された値を返す
+  return value = value
+})
+
+Vue.filter('timeFilter', function (value) {
+  // 処理された値を返す
+  value = (value.slice(11, 13)* 1)+9;
+  if(23<value){
+    return value = value -24
+  } else {
+    return value
+
+  }
+})
+
 Vue.component('every-item', {
   props: ['every','url','file','cels'],
-  template: '<li><span class="time">{{ every.dt_txt}}時</span><img v-bind:src="`${url}${every.weather[0].icon}${file}`"  alt=""><span class="temp"><span v-if="cels">{{ every.main.temp | integerFilter }}</span><span v-else>{{ every.main.temp | tempchangeFilter | integerFilter }}</span>°</span></li>',
+  template: '<li><span class="time">{{ every.dt_txt | timeFilter }}時</span><img v-bind:src="`${url}${every.weather[0].icon}${file}`"  alt=""><span class="temp"><span v-if="cels">{{ every.main.temp | tempFilter  | integerFilter }}</span><span v-else>{{ every.main.temp | tempFilter | tempchangeFilter | integerFilter }}</span>°</span></li>',
 })
 
 let api01 = 'https://api.openweathermap.org/data/2.5/weather?&lang=ja&units=metric',
@@ -38,7 +54,7 @@ let WeatherApp = new Vue({
     loading: true,
     search: false,
     keyword: '',
-    errTxt: '失敗しました'
+    errTxt: '天気の取得に失敗しました。'
   },
   methods: {
     // 曜日取得
@@ -82,12 +98,12 @@ let WeatherApp = new Vue({
       .catch(function(error) { //通信エラーのキャッチを行う処理
         console.log('エラーです')
         this.hasError = true
+        this.loading = false
         this.errTxt = txt
       }.bind(this))
 
      .finally(function() {　 //.finally は通信に関するすべての処理が終わった時に実行される
         this.loading = false　 // loding の真偽値を false にする
-        this.hasError = false
      }.bind(this)) //プロパティ loding に変更した値を返す
 
 
@@ -97,8 +113,11 @@ let WeatherApp = new Vue({
     // 初期表示処理（東京）
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     firstWeather() {
+      this.loading = true
+      this.hasError = false
       this.getWeather('&q='+ initialCity, '天気の取得に失敗しました。')
       this.getDate ()
+      
     },
 
     // 現在位置取得処理
@@ -116,6 +135,7 @@ let WeatherApp = new Vue({
       //this.getWeather('&lat=0&lon=0', '現在位置から天気の取得に失敗しました。')
       this.hasError = true
       this.loading = false
+      this.errTxt = '現在位置から天気の取得に失敗しました。'
     },
 
     // 現在位置取得ボタンを押したときの処理
@@ -128,8 +148,9 @@ let WeatherApp = new Vue({
     // 検索イベント
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     searchWeather() {
+      this.hasError = false
       this.resetData()
-     // this.getWeather('&q=' + this.keyword, '結果は見つかりません。')
+      this.getWeather('&q=' + this.keyword, '検索結果は見つかりません。')
       this.search = false
       this.keyword = ''
     },
@@ -146,23 +167,12 @@ let WeatherApp = new Vue({
       this.todayTemp = ''
       this.maxTemp = ''
       this.minTemp = ''
-      this.todayWeekStr = ''
       this.every3Hour = ''
-      
     },
   },
 
-  // 温度表記変更
+  // 読み込み時表示
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  
-
-  computed: {
-  },
-  filters: {
-    integerFilter(value) { 
-      return value = Math.round(value)
-    }
-  },
   beforeMount() {
     this.firstWeather()
   },
