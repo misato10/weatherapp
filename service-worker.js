@@ -1,5 +1,5 @@
 // Cache name
-const CACHE_NAME = 'pwa-app-caches-v1';
+const CACHE_NAME = 'pwa-wetherapp-caches-v1';
 // Cache targets
 const urlsToCache = [
   './',
