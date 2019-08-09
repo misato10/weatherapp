@@ -4,7 +4,7 @@
   "theme_color": "#fff",
   "background_color": "#fff",
   "display": "standalone",
-  "start_url": "./index.html",
+  "start_url": "/?utm_source=home_screen&utm_medium=pwa",
 	"icons": [
 		{
 			"src": "./img/icon-192x192.png",
