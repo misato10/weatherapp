@@ -10,7 +10,7 @@ if ('serviceWorker' in navigator) {
     //alert('ServiceWorker登録成功です');
       alert('動くよ');
       window.addEventListener('beforeinstallprompt', (event) => {
-      event.preventDefault();      // デフォルト動作をキャンセル
+      //event.preventDefault();      // デフォルト動作をキャンセル
       deferredPrompt = event;   // あとで利用するのでイベントオブジェクトをとっておく
            // ポップアップを開く
       return false;
