@@ -1,13 +1,15 @@
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function(err) {
-      // registration failed :(
-      console.log('ServiceWorker registration failed: ', err);
-    });
-  });
+	// ServiceWorkerを登録
+	navigator.serviceWorker.register('/service-worker.js', {
+		scope: './',
+	}).then(function(registration) {
+		// 登録成功時
+		console.log('登録成功です');
+	}).catch(function(error) {
+		// 登録失敗時
+		console.log('登録できませんでした');
+		console.log(error)
+	});
 }
 
 Vue.filter('integerFilter', function (value) {
