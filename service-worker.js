@@ -1,26 +1,39 @@
-let deferredPrompt;
+const version = 'v1';
 
-window.addEventListener('beforeinstallprompt', function(event) {
-  // Prevent Chrome 67 and earlier from automatically showing the prompt
-  e.preventDefault();
-  // Stash the event so it can be triggered later.
-  deferredPrompt = e;
+// インストール時にキャッシュする
+self.addEventListener('install', (event) => {
+  console.log('service worker install ...');
+
+  // キャッシュ完了までインストールが終わらないように待つ
+  event.waitUntil(
+    caches.open('v1').then((cache) => {
+      return cache.addAll([
+        '/index.html',
+      ]);
+    })
+  );
 });
 
-// Installation must be done by a user gesture! Here, the button click
-btnAdd.addEventListener('click', (e) => {
-  // hide our user interface that shows our A2HS button
-  btnAdd.style.display = 'none';
-  // Show the prompt
-  deferredPrompt.prompt();
-  // Wait for the user to respond to the prompt
-  deferredPrompt.userChoice
-    .then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted the A2HS prompt');
-      } else {
-        console.log('User dismissed the A2HS prompt');
-      }
-      deferredPrompt = null;
-    });
+
+self.addEventListener('activate', (event) => {
+  console.info('activate', event);
+});
+
+self.addEventListener('fetch', function(event) {
+  console.log('fetch', event.request.url);
+
+  event.respondWith(
+    // リクエストに一致するデータがキャッシュにあるかどうか
+    caches.match(event.request).then(function(cacheResponse) {
+      // キャッシュがあればそれを返す、なければリクエストを投げる
+      return cacheResponse || fetch(event.request).then(function(response) {
+        return caches.open('v1').then(function(cache) {
+          // レスポンスをクローンしてキャッシュに入れる
+          cache.put(event.request, response.clone());
+          // オリジナルのレスポンスはそのまま返す
+          return response;
+        });  
+      });
+    })
+  );
 });
