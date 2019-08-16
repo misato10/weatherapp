@@ -73,37 +73,3 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
-
-
-let installPromptEvent;
-
-window.addEventListener('beforeinstallprompt', (event) => {
-  // Chrome67以前で自動的にプロンプトを表示しないようにする?
-  event.preventDefault();
-
-  // イベントを変数に保存する
-  installPromptEvent = event;
-
-  // #btnを活性に
-  document.querySelector('#btn').disabled = false;
-});
-
-// #btnをクリックした時にプロンプトを表示させる
-document.querySelector('#btn').addEventListener('click', () => {
-  // #btnを非活性に
-  document.querySelector('#btn').disabled = true;
-
-  // 　ホーム画面に追加のダイアログを表示させる
-  installPromptEvent.prompt();
-
-  // ダイアログの結果をプロミスで受け取る
-  installPromptEvent.userChoice.then((choice) => {
-    if (choice.outcome === 'accepted') {
-      console.log('User accepted the A2HS prompt');
-    } else {
-      console.log('User dismissed the A2HS prompt');
-    }
-    // Update the install UI to notify the user app can be installed
-    installPromptEvent = null;
-  });
-});
