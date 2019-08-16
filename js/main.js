@@ -7,32 +7,33 @@ if ('serviceWorker' in navigator) {
 	}).then(function(registration) {
 		// 登録成功時
     console.log('ServiceWorker登録成功です');
-    alert('ServiceWorker登録成功です');
+    //alert('ServiceWorker登録成功です');
 
 		if ('onbeforeinstallprompt' in window) {
 			// Web App Banner対応
       console.log('Web App Banner に対応しています');
-      alert('Web App Banner に対応しています');
-      window.addEventListener("beforeinstallprompt", function(e) { 
+     // alert('Web App Banner に対応しています');
+      window.addEventListener('beforeinstallprompt', (event) => {
         // log the platforms provided as options in an install prompt 
-        console.log(e.platforms); // e.g., ["web", "android", "windows"] 
-      
+        console.log(event.platforms); // e.g., ["web", "android", "windows"] 
+        installPromptEvent = event;
         alert('動くよ');
       });
+      installPromptEvent.prompt();
 		} else {
 			// Web App Banner未対応
       console.log('Web App Banner 未対応');
-      alert('Web App Banner 未対応');
+      //alert('Web App Banner 未対応');
 		}
 	}).catch(function(error) {
 		// 登録失敗時
     console.log('ServiceWorker登録失敗です');
-    alert('ServiceWorker登録失敗です');
+    //alert('ServiceWorker登録失敗です');
 		//console.log(error);
 	});
 } else {
   console.log('ServiceWorker 未対応です');
-  alert('ServiceWorker 未対応です');
+  //alert('ServiceWorker 未対応です');
 }
 
 Vue.filter('integerFilter', function (value) {
