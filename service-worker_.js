@@ -1,43 +1,29 @@
-
 self.addEventListener('fetch', function(event) {});
 
 var deferredPrompt;
 
-var btnSave = document.getElementById('btnSave');	
-
-
 window.addEventListener('beforeinstallprompt', (event) => {
-  console.log('ServiceWorker登録成功です');
   event.preventDefault();      // デフォルト動作をキャンセル
   deferredPrompt = event;   // あとで利用するのでイベントオブジェクトをとっておく
   // ポップアップを開く
-  showInstallPromotion();
   return false;
+  
 });
-
-btnSave.addEventListener("click", function () {
-  console.log('クリックしたよ')
+window.onload = function() {
+  // 実行したい処理
   if(deferredPrompt !== undefined) {
-    // The user has had a postive interaction with our app and Chrome
-    // has tried to prompt previously, so let's show the prompt.
+    // インストールプロンプト表示
     deferredPrompt.prompt();
-
-    // Follow what the user has done with the prompt.
-    deferredPrompt.userChoice.then(function(choiceResult) {
-
-      console.log(choiceResult.outcome);
-
+    deferredPrompt.userChoice
+      .then(function(choiceResult) {
+      // キャンセルされた場合
       if(choiceResult.outcome == 'dismissed') {
         console.log('User cancelled home screen install');
-      }
-      else {
+      } else {
+        // インストールされた場合
         console.log('User added to home screen');
       }
-
-      // We no longer need the prompt.  Clear it up.
       deferredPrompt = null;
     });
   }
-}, false);
-
-
+};
