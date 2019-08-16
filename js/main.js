@@ -1,4 +1,4 @@
-
+var deferredPrompt;
 
 if ('serviceWorker' in navigator) {
 	// ServiceWorkerを登録
@@ -16,7 +16,24 @@ if ('serviceWorker' in navigator) {
       return false;
       
     });
-    deferredPrompt.prompt();
+    window.onload = function() {
+      // 実行したい処理
+      if(deferredPrompt !== undefined) {
+        // インストールプロンプト表示
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice
+          .then(function(choiceResult) {
+          // キャンセルされた場合
+          if(choiceResult.outcome == 'dismissed') {
+            console.log('User cancelled home screen install');
+          } else {
+            // インストールされた場合
+            console.log('User added to home screen');
+          }
+          deferredPrompt = null;
+        });
+      }
+   }
 
 		/*if ('onbeforeinstallprompt' in window) {
       console.log('Web App Banner に対応しています');
