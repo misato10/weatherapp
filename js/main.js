@@ -5,15 +5,6 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js');
   });
 }
-
-		/*if ('onbeforeinstallprompt' in window) {
-      console.log('Web App Banner に対応しています');
-     alert('Web App Banner に対応しています');
-      
-		} else {
-      console.log('Web App Banner 未対応');
-      alert('Web App Banner 未対応');
-		}*/
 Vue.filter('integerFilter', function (value) {
   // 処理された値を返す
   return value = Math.floor(value)
