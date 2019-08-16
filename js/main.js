@@ -18,11 +18,6 @@ if ('serviceWorker' in navigator) {
         console.log(e.platforms); // e.g., ["web", "android", "windows"] 
       
         alert('動くよ');
-        e.userChoice.then(function(outcome) { 
-          console.log(outcome); // either "accepted" or "dismissed"
-          alert('エラー');
-          alert('エラー');
-        }, handleError); 
       });
 		} else {
 			// Web App Banner未対応
