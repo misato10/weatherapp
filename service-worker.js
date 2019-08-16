@@ -3,13 +3,13 @@ self.addEventListener('fetch', function(event) {});
 var deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (event) => {
-  //event.preventDefault();      // デフォルト動作をキャンセル
+  event.preventDefault();      // デフォルト動作をキャンセル
   deferredPrompt = event;   // あとで利用するのでイベントオブジェクトをとっておく
   // ポップアップを開く
-  //return false;
+  return false;
   
 });
-/*window.onload = function() {
+window.onload = function() {
   // 実行したい処理
   if(deferredPrompt !== undefined) {
     // インストールプロンプト表示
@@ -25,4 +25,5 @@ window.addEventListener('beforeinstallprompt', (event) => {
       }
       deferredPrompt = null;
     });
-  }*/
+  }
+};
