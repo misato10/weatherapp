@@ -1,3 +1,16 @@
+const divInstall = document.getElementById('installContainer');
+const butInstall = document.getElementById('butInstall');
+
+/* Put code here */
+
+
+
+/* Only register a service worker if it's supported */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js');
+}
+
+
 Vue.filter('integerFilter', function (value) {
   // 処理された値を返す
   return value = Math.floor(value)
