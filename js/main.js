@@ -12,7 +12,7 @@ if ('serviceWorker' in navigator) {
       window.addEventListener('beforeinstallprompt', (event) => {
       event.preventDefault();      // デフォルト動作をキャンセル
       deferredPrompt = event;   // あとで利用するのでイベントオブジェクトをとっておく
-      openInstallPopup();            // ポップアップを開く
+           // ポップアップを開く
       return false;
       
     });
