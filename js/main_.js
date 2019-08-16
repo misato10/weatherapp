@@ -1,10 +1,40 @@
 var deferredPrompt;
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/service-worker.js');
-  });
-}
+  // ServiceWorkerを登録
+  window.addEventListener('load', function() 
+	navigator.serviceWorker.register('/service-worker.js', {
+		scope: '/',
+	}).then(function(registration) {
+		// 登録成功時
+    console.log('ServiceWorker登録成功です');
+    //alert('ServiceWorker登録成功です');
+      //alert('動くよ');
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();      // デフォルト動作をキャンセル
+      deferredPrompt = event;   // あとで利用するのでイベントオブジェクトをとっておく
+      // ポップアップを開く
+      return false;
+      
+    });
+    window.onload = function() {
+      // 実行したい処理
+      if(deferredPrompt !== undefined) {
+        // インストールプロンプト表示
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice
+          .then(function(choiceResult) {
+          // キャンセルされた場合
+          if(choiceResult.outcome == 'dismissed') {
+            console.log('User cancelled home screen install');
+          } else {
+            // インストールされた場合
+            console.log('User added to home screen');
+          }
+          deferredPrompt = null;
+        });
+      }
+   }
 
 		/*if ('onbeforeinstallprompt' in window) {
       console.log('Web App Banner に対応しています');
@@ -14,6 +44,17 @@ if ('serviceWorker' in navigator) {
       console.log('Web App Banner 未対応');
       alert('Web App Banner 未対応');
 		}*/
+	}).catch(function(error) {
+		// 登録失敗時
+    console.log('ServiceWorker登録失敗です');
+    //alert('ServiceWorker登録失敗です');
+		//console.log(error);
+	});
+} else {
+  console.log('ServiceWorker 未対応です');
+  //alert('ServiceWorker 未対応です');
+}
+
 Vue.filter('integerFilter', function (value) {
   // 処理された値を返す
   return value = Math.floor(value)
