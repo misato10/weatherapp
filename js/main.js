@@ -1,10 +1,42 @@
+var deferredPrompt;
 
+var btnSave = document.getElementById('btnSave');	
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/service-worker.js');
-  });
+  navigator.serviceWorker.register('/service-worker.js');
 }
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();      // デフォルト動作をキャンセル
+  deferredPrompt = event;   // あとで利用するのでイベントオブジェクトをとっておく
+  // ポップアップを開く
+  return false;
+});
+
+btnSave.addEventListener("click", function () {
+  console.log('クリックしたよ')
+  if(deferredPrompt !== undefined) {
+    // The user has had a postive interaction with our app and Chrome
+    // has tried to prompt previously, so let's show the prompt.
+    deferredPrompt.prompt();
+
+    // Follow what the user has done with the prompt.
+    deferredPrompt.userChoice.then(function(choiceResult) {
+
+      console.log(choiceResult.outcome);
+
+      if(choiceResult.outcome == 'dismissed') {
+        console.log('User cancelled home screen install');
+      }
+      else {
+        console.log('User added to home screen');
+      }
+
+      // We no longer need the prompt.  Clear it up.
+      deferredPrompt = null;
+    });
+  }
+}, false);
+
 Vue.filter('integerFilter', function (value) {
   // 処理された値を返す
   return value = Math.floor(value)
