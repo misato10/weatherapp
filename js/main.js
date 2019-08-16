@@ -8,15 +8,15 @@ if ('serviceWorker' in navigator) {
 		// 登録成功時
     console.log('ServiceWorker登録成功です');
     //alert('ServiceWorker登録成功です');
-      alert('動くよ');
-      window.addEventListener('beforeinstallprompt', (event) => {
-      //event.preventDefault();      // デフォルト動作をキャンセル
+      //alert('動くよ');
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();      // デフォルト動作をキャンセル
       deferredPrompt = event;   // あとで利用するのでイベントオブジェクトをとっておく
            // ポップアップを開く
       return false;
       
     });
-    installPromptEvent.prompt();
+    deferredPrompt.prompt();
 
 		/*if ('onbeforeinstallprompt' in window) {
       console.log('Web App Banner に対応しています');
