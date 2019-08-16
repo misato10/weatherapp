@@ -8,18 +8,19 @@ if ('serviceWorker' in navigator) {
 		// 登録成功時
     console.log('ServiceWorker登録成功です');
     //alert('ServiceWorker登録成功です');
+    window.addEventListener('beforeinstallprompt', (event) => {
+      // log the platforms provided as options in an install prompt 
+      console.log(event.platforms); // e.g., ["web", "android", "windows"] 
+      installPromptEvent = event;
+      alert('動くよ');
+    });
+    installPromptEvent.prompt();
 
 		if ('onbeforeinstallprompt' in window) {
 			// Web App Banner対応
       console.log('Web App Banner に対応しています');
      // alert('Web App Banner に対応しています');
-      window.addEventListener('beforeinstallprompt', (event) => {
-        // log the platforms provided as options in an install prompt 
-        console.log(event.platforms); // e.g., ["web", "android", "windows"] 
-        installPromptEvent = event;
-        alert('動くよ');
-      });
-      installPromptEvent.prompt();
+      
 		} else {
 			// Web App Banner未対応
       console.log('Web App Banner 未対応');
