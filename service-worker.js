@@ -1,6 +1,6 @@
 const CACHE_NAME = 'cache-v1';
 const urlsToCache = [
-    './index.html',
+    '/',
 ];
 
 self.addEventListener('install', (event) => {
@@ -64,4 +64,13 @@ self.addEventListener('fetch', (event) => {
                     });
             })
   );
+});
+
+
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Stash the event so it can be triggered later.
+  deferredPrompt = e;
+  alert('add to');
 });
