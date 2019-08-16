@@ -1,39 +1,30 @@
-const version = 'v1';
+var CACHE_NAME = 'v1';
+var urlsToCache = [
+  '/index.html',
+];
 
-// インストール時にキャッシュする
-self.addEventListener('install', (event) => {
+self.addEventListener('install', function(event) {
+  // Perform install steps
   console.log('service worker install ...');
-
-  // キャッシュ完了までインストールが終わらないように待つ
   event.waitUntil(
-    caches.open('v1').then((cache) => {
-      return cache.addAll([
-        '/index.html',
-      ]);
-    })
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
+        console.log('Opened cache');
+        return cache.addAll(urlsToCache);
+      })
   );
 });
 
-
-self.addEventListener('activate', (event) => {
-  console.info('activate', event);
-});
-
 self.addEventListener('fetch', function(event) {
-  console.log('fetch', event.request.url);
-
   event.respondWith(
-    // リクエストに一致するデータがキャッシュにあるかどうか
-    caches.match(event.request).then(function(cacheResponse) {
-      // キャッシュがあればそれを返す、なければリクエストを投げる
-      return cacheResponse || fetch(event.request).then(function(response) {
-        return caches.open('v1').then(function(cache) {
-          // レスポンスをクローンしてキャッシュに入れる
-          cache.put(event.request, response.clone());
-          // オリジナルのレスポンスはそのまま返す
+    caches.match(event.request)
+      .then(function(response) {
+        // Cache hit - return response
+        if (response) {
           return response;
-        });  
-      });
-    })
+        }
+        return fetch(event.request);
+      }
+    )
   );
 });
