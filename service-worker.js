@@ -1,5 +1,7 @@
 self.addEventListener('fetch', function(event) {});
 
+var deferredPrompt;
+
 window.addEventListener('beforeinstallprompt', (event) => {
   event.preventDefault();      // デフォルト動作をキャンセル
   deferredPrompt = event;   // あとで利用するのでイベントオブジェクトをとっておく

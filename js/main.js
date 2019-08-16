@@ -1,4 +1,4 @@
-var deferredPrompt;
+
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
