@@ -2,11 +2,6 @@
 const CACHE_NAME = 'pwa-wetherapp-caches-v2';
 // Cache targets
 const urlsToCache = [
-  './',
-  './index.html',
-  './js/main.js',
-  './css/default.css',
-  './css/app.css'
 ];
 
 self.addEventListener('install', function(event) {
