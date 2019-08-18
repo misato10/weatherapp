@@ -108,7 +108,7 @@
 </transition>	
 	
 	<footer>
-    <div id="btnSave"><span>install</span></div>
+		<button class="add-button">Add to home screen</button>
 		<ul class="tempChange">
 			<li v-bind:class='{active:celsius}' v-on:click='celsius=!celsius'>°C</li>
 			<li v-bind:class='{active:!celsius}' v-on:click='celsius=!celsius'>°F</li>
@@ -155,6 +155,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/pwa.js"></script>
 
 </body>
 </html>
