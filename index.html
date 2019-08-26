@@ -17,7 +17,7 @@
 </head>
 <body>
 	
-<div id="weatherApp">
+<div id="weatherApp" v-cloak>
 	<transition name="fade">
 		<div v-if="city" class="container">
 		<div class="mainArea">
@@ -72,8 +72,6 @@
 			</div>
 			
 		</div><!-- #subArea -->
-		<!--<pre style="text-align: left">今日の天気JSON：{{ todayWhether}}</pre>
-    <pre style="text-align: left">数日間の天気JSON：{{ everyWhether}}</pre>-->
 		</div>
 	</transition>	
 

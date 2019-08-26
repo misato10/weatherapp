@@ -10,13 +10,19 @@ html, body {
 	font-size: 10px;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 #weatherApp {
 	text-align: center;
 	font-size: 1.4rem;
 	letter-spacing: 0.05em;
 	line-height: 1.4;
-	padding-bottom: 70px;
+  padding-bottom: 70px;
+  opacity: 0;
 }
+
 
 #weatherApp * {
 	box-sizing: border-box;
@@ -340,11 +346,11 @@ footer .icoSerch svg {
 	left: 0;
 	right: 0;
 	text-align: center;
-  }
+}
   
-  .loading.fade-enter-active {
+.loading.fade-enter-active {
 	transition: opacity .2s;
-  }
+}
   
   .loading.fade-leave-active {
 	transition: opacity .2s 1s;
