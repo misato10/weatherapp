@@ -318,8 +318,9 @@ footer .icoSerch svg {
 }
 .addArea > div .closeButton {
   position: absolute;
-  top: 10px;
-  right: 10px;;
+  top: 50%;
+  margin-top: -7px;
+  right: 10px;
 }
 .addArea > div .closeButton svg {
   fill: #666;
