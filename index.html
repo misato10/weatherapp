@@ -106,7 +106,10 @@
 </transition>	
 	
 	<footer>
-		<button class="add-button">Add to home screen</button>
+		<div class="addArea">
+      <button class="addButton">ホーム画面に追加</button>
+      <button class="close">×</button>
+    </div>
 		<ul class="tempChange">
 			<li v-bind:class='{active:celsius}' v-on:click='celsius=!celsius'>°C</li>
 			<li v-bind:class='{active:!celsius}' v-on:click='celsius=!celsius'>°F</li>
