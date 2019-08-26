@@ -22,7 +22,7 @@ if('serviceWorker' in navigator) {
   
     addBtn.addEventListener('click', (e) => {
       // hide our user interface that shows our A2HS button
-      aaddArea.style.display = 'none';
+      addArea.style.display = 'none';
       // Show the prompt
       deferredPrompt.prompt();
       // Wait for the user to respond to the prompt
@@ -36,6 +36,6 @@ if('serviceWorker' in navigator) {
         });
     });
     closeBtn.addEventListener('click', (e) => {
-      aaddArea.style.display = 'none';
+      addArea.style.display = 'none';
     });
   });
