@@ -38,5 +38,4 @@ if('serviceWorker' in navigator) {
     closeBtn.addEventListener('click', (e) => {
       aaddArea.style.display = 'none';
     });
-    
   });
