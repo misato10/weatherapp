@@ -105,16 +105,6 @@
 	</div>
 </transition>	
 	<footer>
-		<div class="addArea">
-      <div>
-        <span><img src="img/icon-96x96.png" alt=""></span>
-        <p>お天気アプリ</p>
-        <button class="closeButton">×</button>
-      </div>
-      
-      <button class="addButton">ホーム画面に追加</button>
-      
-    </div>
 		<ul class="tempChange">
 			<li v-bind:class='{active:celsius}' v-on:click='celsius=!celsius'>°C</li>
 			<li v-bind:class='{active:!celsius}' v-on:click='celsius=!celsius'>°F</li>
@@ -146,6 +136,15 @@
         </svg>
     </p>
   　</footer>
+
+    <div class="addArea">
+      <div>
+        <span><img src="img/icon-96x96.png" alt=""></span>
+        <p>お天気アプリ</p>
+        <button class="closeButton">×</button>
+      </div>
+      <button class="addButton">ホーム画面に追加</button>
+    </div>
 
 <transition name="fade">
 	<div v-if="hasError" class="errorArea">

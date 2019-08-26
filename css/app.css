@@ -275,6 +275,49 @@ footer .icoSerch svg {
 
 /* -----------------------------------------------------------------------------
 
+	addArea
+  
+----------------------------------------------------------------------------- */
+.addArea {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+}
+.addArea > div {
+  position: relative;
+  padding: 10px;
+}
+.addArea > div span {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 25px;
+  overflow: hidden;
+}
+.addArea > div span img {
+  width: 100%;
+}
+.addArea > div p {
+  font-weight: bold;
+}
+.addArea > div .closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.addArea > button {
+  width: 100%;
+  height: 40px;
+  color: #fff;
+  background: #3D84E1;
+}
+
+
+
+/* -----------------------------------------------------------------------------
+
 ローディング
   
 ----------------------------------------------------------------------------- */
