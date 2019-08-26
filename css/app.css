@@ -117,7 +117,7 @@ html, body {
   ---------------------------------------------*/
   
   .container.fade-enter-active {
-	transition: opacity .2s 1.2s;
+	transition: opacity .2s 1.4s;
   } 
   .container.fade-leave-active {
 	transition: opacity .2s;
