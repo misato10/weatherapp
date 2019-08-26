@@ -26,7 +26,7 @@ if('serviceWorker' in navigator) {
       // Show the prompt
       
     closeBtn.addEventListener('click', (e) => {
-      aaddArea.style.display = 'none';
+      addArea.style.display = 'none';
     });
     
   });
