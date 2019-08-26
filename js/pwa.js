@@ -9,7 +9,7 @@ if('serviceWorker' in navigator) {
   let deferredPrompt;
   const addArea = document.querySelector('.addArea');
   const addBtn = document.querySelector('.addButton');
-  const closeBtn = document.querySelector('.closeButton');
+  const closeBtn = document.querySelector('.close');
   addArea.style.display = 'none';
   
   window.addEventListener('beforeinstallprompt', (e) => {
