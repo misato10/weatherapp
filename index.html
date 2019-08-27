@@ -75,33 +75,34 @@
 		</div>
 	</transition>	
 
-
-<transition name="fade">
-		<div v-if="loading" class="loading">
-		  <div class="loader">
-			<svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-	  <path fill="#ccc" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
-		<animateTransform attributeType="xml"
-		  attributeName="transform"
-		  type="rotate"
-		  from="0 25 25"
-		  to="360 25 25"
-		  dur="0.8s"
-		  repeatCount="indefinite"/>
-		</path>
-	  </svg>
-		  </div>
-		</div>
-</transition>
-<transition name="fade">
-	<div v-if="search" class="searchArea">
-		<div class="inner">
-			<p class="txt">都市名を英語で入力</p>
-      <input type="text" v-model="keyword" v-on:keyup.enter="searchWeather">
-      <p class="cancel"　v-on:click='search=!search'>キャンセル</p>
-		</div>
-	</div>
-</transition>	
+  <transition name="fade">
+      <div v-if="loading" class="loading">
+        <div class="loader">
+        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+      <path fill="#ccc" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+      <animateTransform attributeType="xml"
+        attributeName="transform"
+        type="rotate"
+        from="0 25 25"
+        to="360 25 25"
+        dur="0.8s"
+        repeatCount="indefinite"/>
+      </path>
+      </svg>
+        </div>
+      </div>
+  </transition>
+  
+  <transition name="fade">
+    <div v-if="search" class="searchArea">
+      <div class="inner">
+        <p class="txt">都市名を英語で入力</p>
+        <input type="text" v-model="keyword" v-on:keyup.enter="searchWeather">
+        <p class="cancel"　v-on:click='search=!search'>キャンセル</p>
+      </div>
+    </div>
+  </transition>	
+  
 	<footer>
 		<ul class="tempChange">
 			<li v-bind:class='{active:celsius}' v-on:click='celsius=!celsius'>°C</li>
@@ -151,14 +152,13 @@
       <button class="addButton">ホーム画面に追加</button>
     </div>
 
-<transition name="fade">
-	<div v-if="hasError" class="errorArea">
-    <p class="txt">{{ errTxt }}</p>
-    <p class="reset" @click="firstWeather();">リセット</p>
-	</div>
-</transition>
-  
-  
+    <transition name="fade">
+      <div v-if="hasError" class="errorArea">
+        <p class="txt">{{ errTxt }}</p>
+        <p class="reset" @click="firstWeather();">リセット</p>
+      </div>
+    </transition>
+
 
 </div><!-- #WeatherApp -->
 
